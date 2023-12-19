@@ -114,7 +114,7 @@
 
       <div class="form-floating">
         <div class="d-flex justify-content-center links">
-          Don't have an account? <a href="register.html" class="ml-2">Sign Up</a>
+          Don't have an account? <a href="register" class="ml-2">Sign Up</a>
         </div>
         <div class="d-flex justify-content-center links">
           <a href="#">Forgot your password?</a>
