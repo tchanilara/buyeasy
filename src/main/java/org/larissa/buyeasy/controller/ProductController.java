@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 
 @Controller
 @Slf4j
@@ -42,6 +44,17 @@ public class ProductController {
         if (!StringUtils.isEmpty(success)) {
             response.addObject("success", success);
         }
+        return response;
+    }
+
+    @GetMapping("/")
+    public ModelAndView listProduct(){
+        ModelAndView response = new ModelAndView();
+        response.setViewName("index");
+        log.info("In List Product");
+        List<Product> products = productDao.findAllProducts();
+        response.addObject("productVar", products);
+
         return response;
     }
 
