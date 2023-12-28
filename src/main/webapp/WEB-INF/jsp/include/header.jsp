@@ -52,8 +52,8 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex ">
-                    <input class="form-control  bg-opacity-10 border-dark" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex " action="/product/search">
+                    <input class="form-control  bg-opacity-10 border-dark" type="search" id="search" name="search" placeholder="Search" aria-label="Search">
 
                     <button  class="btn  bg-opacity-10 border-0 ms-n5" type="submit"><i class="bi bi-search"></i></button>
                   </form>

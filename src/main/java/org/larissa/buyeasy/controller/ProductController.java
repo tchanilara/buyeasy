@@ -19,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -82,6 +83,46 @@ public class ProductController {
         ModelAndView response =  new ModelAndView("admin/product");
         response.setViewName("redirect:product?success=Product Added Successfully");
 
+
+        return response;
+    }
+
+    @RequestMapping("/product/detail")
+    public ModelAndView detail(@RequestParam Integer id) {
+        ModelAndView response = new ModelAndView("product/detail");
+
+        Product product = productDao.findById(id);
+
+        if (product == null) {
+            log.warn("Product with id " + id + " was not found");
+            response.setViewName("redirect:/error/404");
+            return response;
+        }
+
+        response.addObject("product", product);
+
+        return response;
+    }
+
+    @GetMapping("/product/search")
+    public ModelAndView search(@RequestParam(required = false) String search) {
+        ModelAndView response = new ModelAndView("product/search");
+
+        log.debug("in the product search controller method : search pattern = " + search );
+
+        if (!StringUtils.isEmpty(search) ) {
+
+            response.addObject("search", search);
+
+            if (!StringUtils.isEmpty(search)) {
+                search = "%" + search + "%";
+            }
+
+            List<Product> products = productDao.findBySearch(search);
+
+            response.addObject("productVar", products);
+
+        }
 
         return response;
     }
