@@ -53,6 +53,11 @@
                             <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                         </ul>
                     </li>
+                    <sec:authorize access="hasAnyAuthority('ADMIN')">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/admin/product">Add Product</a>
+                                        </li>
+                                    </sec:authorize>
                 </ul>
                 <form class="d-flex " action="/product/search">
                     <input class="form-control  bg-opacity-10 border-dark" type="search" id="search" name="search" placeholder="Search" aria-label="Search">

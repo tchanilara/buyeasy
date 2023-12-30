@@ -66,33 +66,7 @@ public class ProductController {
         return response;
     }
 
-    @GetMapping ("/admin/productSubmit")
-    public ModelAndView createProductSubmit(@Valid CreateProductFormBean form, BindingResult bindingResult, HttpSession session)  {
 
-
-        if(bindingResult.hasErrors()){
-            log.info("In add product submit has errors");
-            ModelAndView response =  new ModelAndView("admin/product");
-            for(ObjectError error: bindingResult.getAllErrors()){
-                log.info("error: "+ error.getDefaultMessage());
-
-            }
-            response.addObject("form",form);
-            response.addObject("errors", bindingResult);
-            return response;
-        }
-
-
-        Product p =  productService.addProduct(form);
-
-
-
-        ModelAndView response =  new ModelAndView("admin/product");
-        response.setViewName("redirect:product?success=Product Added Successfully");
-
-
-        return response;
-    }
 
     @RequestMapping("/product/detail")
     public ModelAndView detail(@RequestParam Integer id) {
