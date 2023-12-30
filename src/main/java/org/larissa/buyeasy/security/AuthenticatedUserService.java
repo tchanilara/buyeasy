@@ -1,11 +1,13 @@
 package org.larissa.buyeasy.security;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.larissa.buyeasy.database.dao.OrderDAO;
 import org.larissa.buyeasy.database.dao.UserDAO;
 import org.larissa.buyeasy.database.entity.Order;
 import org.larissa.buyeasy.database.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,6 +17,7 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class AuthenticatedUserService {
 
 
@@ -30,9 +33,14 @@ public class AuthenticatedUserService {
         // in our case the username is the email
         SecurityContext context = SecurityContextHolder.getContext();
         if (context != null && context.getAuthentication() != null) {
-            final org.springframework.security.core.userdetails.User principal =
-                    (org.springframework.security.core.userdetails.User) context.getAuthentication().getPrincipal();
-            return principal.getUsername();
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (!(authentication instanceof AnonymousAuthenticationToken)) {
+                final org.springframework.security.core.userdetails.User principal =
+                        (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
+                return principal.getUsername();
+            }else{
+                return null;
+            }
         } else {
             // there is no spring security context for this user so they are not logged in
             return null;
@@ -40,6 +48,8 @@ public class AuthenticatedUserService {
     }
 
     public User loadCurrentUser() {
+        if(getCurrentUsername() ==  null)
+            return  null;
         User user = userDao.findByEmailIgnoreCase(getCurrentUsername());
         return user;
     }

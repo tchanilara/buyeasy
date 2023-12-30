@@ -5,6 +5,7 @@ import org.larissa.buyeasy.database.dao.OrderProductDAO;
 import org.larissa.buyeasy.database.dao.ProductDAO;
 import org.larissa.buyeasy.database.entity.Order;
 import org.larissa.buyeasy.database.entity.OrderProduct;
+import org.larissa.buyeasy.database.entity.User;
 import org.larissa.buyeasy.security.AuthenticatedUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,7 +79,7 @@ public class CartService {
 
     }
 
-    public List<OrderProduct> viewCart(){
+    public List<OrderProduct> getProductCart(){
 
         List<OrderProduct> carts = new ArrayList<>();
         Integer userId = authenticatedUserService.loadCurrentUser().getId();
@@ -106,5 +107,12 @@ public class CartService {
         }
 
         return carts;
+    }
+    public  int getSizeCart(){
+        User user = authenticatedUserService.loadCurrentUser();
+        if(user == null){
+            return 0;
+        }
+        return getProductCart().size();
     }
 }

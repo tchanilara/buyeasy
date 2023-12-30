@@ -29,6 +29,7 @@ public class SecurityConfig {
         http.authorizeRequests()
                 .requestMatchers(
                         new AntPathRequestMatcher("/admin/**"),
+                        new AntPathRequestMatcher("/order/**"),
                         new AntPathRequestMatcher("/user/**")).authenticated()
                 .anyRequest().permitAll();
 

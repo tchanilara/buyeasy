@@ -9,9 +9,11 @@ import org.larissa.buyeasy.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
@@ -22,6 +24,15 @@ public class AdminController {
     @Autowired
     private ProductService productService;
 
+    @GetMapping("/admin/product")
+    public ModelAndView createProduct(@RequestParam(required = false) String success){
+        ModelAndView response = new ModelAndView();
+        response.setViewName("admin/product");
+        if (!StringUtils.isEmpty(success)) {
+            response.addObject("success", success);
+        }
+        return response;
+    }
     @GetMapping("/admin/productSubmit")
     public ModelAndView createProductSubmit(@Valid CreateProductFormBean form, BindingResult bindingResult, HttpSession session)  {
 

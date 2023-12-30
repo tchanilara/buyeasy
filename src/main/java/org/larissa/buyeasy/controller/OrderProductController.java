@@ -59,7 +59,7 @@ public class OrderProductController {
         ModelAndView response = new ModelAndView("order/viewcart");
 
         //retrieve a current shopping cart
-        List<OrderProduct> carts = cartService.viewCart();
+        List<OrderProduct> carts = cartService.getProductCart();
 
         double subTotal = 0.00;
         double shipping = 25.00;

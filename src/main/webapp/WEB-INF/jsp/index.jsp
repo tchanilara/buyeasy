@@ -2,10 +2,10 @@
 <jsp:include page="include/header.jsp" />
 <!-- Section-->
 <section class="py-5">
-    <div class="container px-4 px-lg-5 mt-5">
+    <div class="container px-4 px-lg-5 mt-1">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <c:forEach items="${productVar}" var="product">
-                <div class="col mb-5">
+                <div class="col mb-2">
                     <div class="card h-100">
                         <!-- Product image-->
                         <img class="card-img-top" src="${product.imageUrl}" alt="..." />
@@ -22,7 +22,7 @@
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/product/detail?id=${product.id}">View Details</a>
                             </div>
-                            <div class="text-center mt-3"><a class="btn btn-outline-dark mt-auto" href="/order/add?id=${product.id}&qty=1"><i class="bi bi-cart-plus">
+                            <div class="text-center mt-2"><a class="btn btn-outline-dark mt-auto" href="/order/add?id=${product.id}&qty=1"><i class="bi bi-cart-plus">
                             </i>
                              Add to Cart </a>
                             </div>

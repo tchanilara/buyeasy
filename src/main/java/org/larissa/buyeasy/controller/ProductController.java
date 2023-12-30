@@ -42,15 +42,7 @@ public class ProductController {
     private CartService cartService;
 
 
-    @GetMapping("/admin/product")
-    public ModelAndView createProduct(@RequestParam(required = false) String success){
-        ModelAndView response = new ModelAndView();
-        response.setViewName("admin/product");
-        if (!StringUtils.isEmpty(success)) {
-            response.addObject("success", success);
-        }
-        return response;
-    }
+
 
     @GetMapping("/")
     public ModelAndView listProduct(){
@@ -58,10 +50,9 @@ public class ProductController {
         response.setViewName("index");
         log.info("In List Product");
         List<Product> products = productDao.findAllProducts();
-        //retrieve a current shopping cart
-        List<OrderProduct> carts = cartService.viewCart();
+
         response.addObject("productVar", products);
-        response.addObject("size", carts.size());
+        response.addObject("size", cartService.getSizeCart());
 
         return response;
     }
