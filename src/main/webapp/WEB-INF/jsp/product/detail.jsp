@@ -20,7 +20,13 @@
                 <h5 class="card-title"><a href="/product/detail?id=${product.id}">${product.name}</a></h5>
                 <p class="card-text">${product.description}</p>
                 <p class="card-text">$${product.price}</p>
-                <div class="text-center mt-3"><a class="btn btn-outline-dark mt-auto" href="#"><i class="bi bi-cart-plus">
+                <div class="input-group">
+                    <span class="input-group-btn mr-3">Quantity
+                    </span>
+                    <input type="text" name="quantity" size="3" class="form-control input-number" value="1" min="1" max="30">
+                    </div>
+
+                <div class="text-center mt-3"><a class="btn btn-outline-dark mt-auto" href="/order/viewcart?id=${product.id}"><i class="bi bi-cart-plus">
                                             </i>
                                              Add to Cart </a>
             </div>

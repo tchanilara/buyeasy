@@ -1,3 +1,5 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,12 +59,42 @@
 
                     <button  class="btn  bg-opacity-10 border-0 ms-n5" type="submit"><i class="bi bi-search"></i></button>
                   </form>
+                  <sec:authorize access="!isAuthenticated()">
                 <form class="d-flex" action="/auth/login">
                     <button type="submit" class="btn btn-primary">Sign in</button>
                 </form>
                 <form class="d-flex" action="/auth/register">
                     <button type="submit" class="btn btn-secondary">Register</button>
                 </form>
+                </sec:authorize>
+
+                <sec:authorize access="isAuthenticated()">
+
+                <form class="d-flex">
+                                    <button class="btn btn-outline-dark" type="submit">
+                                        <i class="bi-cart-fill me-1"></i>
+                                        Cart
+                                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                                    </button>
+                                </form>
+                                <sec:authorize access="isAuthenticated()">
+                                <div class="dropdown">
+                                  <button class="btn btn-outline-dark rounded-pill dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person"></i>
+                                  </button>
+                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href=""><sec:authentication property="principal.username" /></a></li>
+                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li><a class="dropdown-item" href="#"><hr class="dropdown-divider" /></a></li>
+                                    <li><a class="dropdown-item" href="#">History</a></li>
+                                  </ul>
+                                </div>
+                                </sec:authorize>
+
+                                <form class="d-flex" action="/auth/logout">
+                                    <button type="submit" class="btn btn-outline-dark rounded-pill" title="Log Out"><i class="bi bi-box-arrow-right"></i></button>
+                                </form>
+                </sec:authorize>
 
             </div>
         </div>

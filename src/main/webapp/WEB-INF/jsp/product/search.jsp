@@ -20,9 +20,9 @@
                            </div>
                            <!-- Product actions-->
                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                               <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/product/detail?id=${product.id}">View options</a>
+                               <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/product/detail?id=${product.id}">View Details</a>
                                </div>
-                               <div class="text-center mt-3"><a class="btn btn-outline-dark mt-auto" href="#"><i class="bi bi-cart-plus">
+                               <div class="text-center mt-3"><a class="btn btn-outline-dark mt-auto" href="/order/add?id=${product.id}&qty=1"><i class="bi bi-cart-plus">
                                </i>
                                 Add to Cart </a>
                                </div>

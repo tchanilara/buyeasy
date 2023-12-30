@@ -1,7 +1,9 @@
 package org.larissa.buyeasy.security;
 
 import jakarta.servlet.http.HttpSession;
+import org.larissa.buyeasy.database.dao.OrderDAO;
 import org.larissa.buyeasy.database.dao.UserDAO;
+import org.larissa.buyeasy.database.entity.Order;
 import org.larissa.buyeasy.database.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -50,5 +52,7 @@ public class AuthenticatedUserService {
         sc.setAuthentication(result);
         session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, sc);
     }
+
+
 
 }
