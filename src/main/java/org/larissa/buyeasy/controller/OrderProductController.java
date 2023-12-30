@@ -27,15 +27,6 @@ public class OrderProductController {
     @Autowired
     CartService cartService;
 
-    @Autowired
-    OrderService orderService;
-
-    @Autowired
-    OrderProductDAO orderProductDao;
-
-    @Autowired
-    AuthenticatedUserService authenticatedUserService;
-
     @RequestMapping("/order/add")
     public ModelAndView addProduct(@RequestParam Integer id, Integer qty) {
         ModelAndView response = new ModelAndView("order/viewcart");
