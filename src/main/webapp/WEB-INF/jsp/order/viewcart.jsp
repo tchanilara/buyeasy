@@ -36,7 +36,7 @@
                           <div>
                             <img
                               src="${cart.product.imageUrl}"
-                              class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                              class="img-fluid rounded-3" alt="Shopping item" name="IMG" style="width: 65px;">
                           </div>
                           <div class="ms-3">
                             <h5>${cart.product.name}</h5>
@@ -60,7 +60,7 @@
             </c:forEach>
 
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-4" data-show-if="IMG">
 
                   <div class="card bg-primary text-white rounded-3">
                     <div class="card-body">
@@ -130,12 +130,14 @@
                         <p class="mb-2">$${total}</p>
                       </div>
 
-                      <button type="button" class="btn btn-info btn-block btn-lg">
+                        <form class="d-flex " action="/order/checkout">
+                      <button type="submit" class="btn btn-info btn-block btn-lg">
                         <div class="d-flex justify-content-between">
                           <span>$${total}</span>
                           <span>Checkout <i class="bi bi-arrow-right ms-2"></i></span>
                         </div>
                       </button>
+                      </form>
 
                     </div>
                   </div>

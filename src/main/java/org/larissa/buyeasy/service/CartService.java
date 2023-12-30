@@ -113,6 +113,19 @@ public class CartService {
         if(user == null){
             return 0;
         }
-        return getProductCart().size();
+
+        List<OrderProduct> carts =getProductCart();
+
+        return carts.isEmpty() ? 0 : carts.size();
+    }
+
+    public  void checkout(){
+        Integer userId = authenticatedUserService.loadCurrentUser().getId();
+        Order order = orderDao.findCurrentOrder(userId, "Cart");
+        if(order != null){
+            order.setStatus("On Hold");
+            orderDao.save(order);
+        }
+
     }
 }

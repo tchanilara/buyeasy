@@ -101,5 +101,15 @@ public class OrderProductController {
          response.addObject("total", df.format(subTotal + taxes+ shipping));
          return response;
     }
+
+    @RequestMapping("/order/checkout")
+    public ModelAndView checkout() {
+        ModelAndView response = new ModelAndView("order/viewcart");
+
+        cartService.checkout();
+        response.addObject("size", 0);
+
+        return response;
+    }
 }
 
