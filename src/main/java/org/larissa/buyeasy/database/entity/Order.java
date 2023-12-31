@@ -33,5 +33,5 @@ public class Order {
     private  String status;
 
     @Column(name = "comments")
-    private @Getter @Setter String comments;
+    private  String comments;
 }

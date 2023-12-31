@@ -32,7 +32,7 @@ public class CartService {
     @Autowired
     OrderService orderService;
 
-    public List<OrderProduct> loadCurrentCart(Integer orderId){
+    public List<OrderProduct> findByOrderId(Integer orderId){
         //from order current get list of order details
         List<OrderProduct> orderProducts = orderProductDao.findByOrderId(orderId);
 
@@ -75,7 +75,7 @@ public class CartService {
                 updateQty(qty, orderProduct.getId());
             }
         }
-        return  loadCurrentCart(order.getId());
+        return  findByOrderId(order.getId());
 
     }
 
@@ -89,7 +89,7 @@ public class CartService {
         //create a new shopping cart or orderProduct
         if(order != null){
                 //retrieve or find all product for this order
-                carts = loadCurrentCart(order.getId());
+                carts = findByOrderId(order.getId());
         }
         return  carts;
 
@@ -103,7 +103,7 @@ public class CartService {
         if (order != null) {
             OrderProduct orderProduct = orderProductDao.findByOrderIdProductId(productId, order.getId());
             orderProductDao.delete(orderProduct);
-            carts = loadCurrentCart(order.getId());
+            carts = findByOrderId(order.getId());
         }
 
         return carts;
@@ -119,13 +119,5 @@ public class CartService {
         return carts.isEmpty() ? 0 : carts.size();
     }
 
-    public  void checkout(){
-        Integer userId = authenticatedUserService.loadCurrentUser().getId();
-        Order order = orderDao.findCurrentOrder(userId, "Cart");
-        if(order != null){
-            order.setStatus("On Hold");
-            orderDao.save(order);
-        }
 
-    }
 }

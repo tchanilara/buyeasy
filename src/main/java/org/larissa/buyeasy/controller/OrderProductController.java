@@ -102,14 +102,19 @@ public class OrderProductController {
          return response;
     }
 
-    @RequestMapping("/order/checkout")
-    public ModelAndView checkout() {
-        ModelAndView response = new ModelAndView("order/viewcart");
+    @RequestMapping("/order/detail")
+    public ModelAndView detail(@RequestParam Integer orderid) {
+        ModelAndView response = new ModelAndView("order/detail");
 
-        cartService.checkout();
-        response.addObject("size", 0);
+        List<OrderProduct> carts = cartService.findByOrderId(orderid);
+
+        response.addObject("cartVar", carts);
+        response.addObject("orderid", orderid);
+        response.addObject("size", cartService.getSizeCart() );
 
         return response;
     }
+
+
 }
 

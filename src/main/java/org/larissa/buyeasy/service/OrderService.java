@@ -36,6 +36,19 @@ public class OrderService {
 
     }
 
+    public  void checkout(){
+        Integer userId = authenticatedUserService.loadCurrentUser().getId();
+        Order order = orderDao.findCurrentOrder(userId, "Cart");
+        if(order != null){
+            order.setStatus("On Hold");
+            orderDao.save(order);
+        }
 
+    }
+    public  List<Order>  history(){
+        Integer userId = authenticatedUserService.loadCurrentUser().getId();
+        return orderDao.findByUserId(userId);
+
+    }
 
 }
