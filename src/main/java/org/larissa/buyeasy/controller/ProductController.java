@@ -72,6 +72,7 @@ public class ProductController {
         }
 
         response.addObject("product", product);
+        response.addObject("size", cartService.getSizeCart());
 
         return response;
     }
@@ -93,6 +94,7 @@ public class ProductController {
             List<Product> products = productDao.findBySearch(search);
 
             response.addObject("productVar", products);
+            response.addObject("size", cartService.getSizeCart());
 
         }
 

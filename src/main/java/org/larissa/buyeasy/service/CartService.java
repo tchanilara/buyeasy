@@ -119,5 +119,28 @@ public class CartService {
         return carts.isEmpty() ? 0 : carts.size();
     }
 
+    public List<OrderProduct> updateProductToOrder(Integer productId, Integer qty){
+
+        Integer userId = authenticatedUserService.loadCurrentUser().getId();
+        Order order = orderDao.findCurrentOrder(userId,"Cart");
+
+        //return a empty cart
+        if(order == null){
+            return new ArrayList<>();
+
+        }else{
+            //retrieve the  current shopping cart
+            OrderProduct orderProduct = orderProductDao.findByOrderIdProductId(productId, order.getId());
+            if(orderProduct == null){
+                return new ArrayList<>();
+            }else {
+                //this product is already inside the shopping just update the quantity
+                updateQty(qty, orderProduct.getId());
+            }
+        }
+        return  findByOrderId(order.getId());
+
+    }
+
 
 }

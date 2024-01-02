@@ -3,7 +3,7 @@
 
   <link href="/pub/css/cart.css" rel="stylesheet">
 
-  <section class="h-100 h-custom" style="background-color: #eee;">
+  <section style="background-color: #eee;">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col">
@@ -44,8 +44,12 @@
                           </div>
                           <div class="d-flex flex-row align-items-center">
                             <div style="width: 50px;">
-                              <input type="text" name="quantity" size="3" class="form-control input-number"
+                            <form class="d-flex " action="/order/update">
+                              <input type="hidden" name="id"  value="${cart.product.id}">
+                              <input type="search" name="qty" size="3" class="form-control input-number"
                                 value="${cart.quantityOrdered}" min="1" max="30">
+
+                                </form>
                             </div>
                             <div style="width: 80px;">
                               <h5 class="mb-0 ml-2">$${cart.product.price}</h5>
@@ -159,3 +163,4 @@
       </div>
     </div>
   </section>
+  <jsp:include page="../include/footer.jsp" />

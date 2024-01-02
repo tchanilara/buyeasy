@@ -30,6 +30,8 @@ public class OrderProductController {
     @RequestMapping("/order/add")
     public ModelAndView addProduct(@RequestParam Integer id, Integer qty) {
         ModelAndView response = new ModelAndView("order/viewcart");
+        if(qty < 1)
+            return response;
         //add product and retrieve a current shopping cart
         List<OrderProduct> carts = cartService.addProductToOrder(id, qty);
         log.info("In order view. cart  size " + carts.size());
@@ -115,6 +117,32 @@ public class OrderProductController {
         return response;
     }
 
+    @RequestMapping("/order/update")
+    public ModelAndView updateQtyProduct(@RequestParam Integer id, Integer qty) {
+        ModelAndView response = new ModelAndView("order/viewcart");
+        if(qty < 1)
+            return response;
+        //add product and retrieve a current shopping cart
+        List<OrderProduct> carts = cartService.updateProductToOrder(id, qty);
+        log.info("In order view. cart  size " + carts.size());
 
+        double subTotal = 0.00;
+        double shipping = 25.00;
+        double taxes = 0.06;
+        DecimalFormat df = new DecimalFormat("0.00");
+        for (OrderProduct orderProduct : carts) {
+            log.debug("orderP: id = " + orderProduct.getId() + " quantity = " + orderProduct.getQuantityOrdered());
+            subTotal += orderProduct.getProduct().getPrice() * orderProduct.getQuantityOrdered();
+        }
+
+        taxes = taxes * (subTotal + shipping);
+        response.addObject("cartVar", carts);
+        response.addObject("size", carts.size());
+        response.addObject("subtotal", df.format(subTotal));
+        response.addObject("shipping", df.format(shipping));
+        response.addObject("taxes", df.format(taxes));
+        response.addObject("total", df.format(subTotal + taxes+ shipping));
+        return response;
+    }
 }
 
