@@ -34,4 +34,19 @@ public class Order {
 
     @Column(name = "comments")
     private  String comments;
+
+    @Transient
+    public Double getTotalOrderPrice() {
+        double sum = 0D;
+        List<OrderProduct> orderProducts = getOrderProductList();
+        for (OrderProduct op : orderProducts) {
+            sum += op.getTotalPrice();
+        }
+        return sum;
+    }
+
+    @Transient
+    public int getNumberOfProducts() {
+        return this.orderProductList.size();
+    }
 }

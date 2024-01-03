@@ -10,6 +10,7 @@ import org.larissa.buyeasy.security.AuthenticatedUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -142,5 +143,24 @@ public class CartService {
 
     }
 
+    public List<String> getTotal(List<OrderProduct> carts){
+        DecimalFormat df = new DecimalFormat("0.00");
+        List<String> totals = new ArrayList<>();
+
+        double subTotal = 0.00;
+        double shipping = 25.00;
+        double taxes = 0.06;
+
+        for (OrderProduct orderProduct : carts) {
+            subTotal += orderProduct.getProduct().getPrice() * orderProduct.getQuantityOrdered();
+        }
+
+        taxes = taxes * (subTotal + shipping);
+        totals.add(df.format(subTotal));
+        totals.add(df.format(shipping));
+        totals.add(df.format(taxes));
+        totals.add(df.format(subTotal + taxes+ shipping));
+        return totals;
+    }
 
 }

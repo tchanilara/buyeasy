@@ -25,4 +25,9 @@ public class OrderProduct {
 
     @Column(name = "quantity_ordered")
     private Integer quantityOrdered;
+
+    @Transient
+    public Double getTotalPrice() {
+        return getProduct().getPrice() * getQuantityOrdered();
+    }
 }
