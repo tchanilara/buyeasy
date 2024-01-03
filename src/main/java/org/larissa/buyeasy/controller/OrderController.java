@@ -7,6 +7,7 @@ import org.larissa.buyeasy.service.CartService;
 import org.larissa.buyeasy.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,8 +27,13 @@ public class OrderController {
     public ModelAndView checkout() {
         ModelAndView response = new ModelAndView("order/viewcart");
 
-        orderService.checkout();
-        response.addObject("size", 0);
+        if (orderService.checkout() != null){
+            response.setViewName("redirect:viewcart?success=Order Placed Successfully");
+        }else{
+            response.setViewName("redirect:viewcart?error=Something wrong happened. Please try again.");
+        }
+
+        response.addObject("size", cartService.getSizeCart());
 
         return response;
     }
@@ -45,11 +51,18 @@ public class OrderController {
     }
 
     @RequestMapping("/order/viewcart")
-    public ModelAndView viewcart() {
+    public ModelAndView viewcart(@RequestParam(required = false) String success, @RequestParam(required = false) String error) {
         ModelAndView response = new ModelAndView("order/viewcart");
 
         //retrieve a current shopping cart
         Order order = orderService.getCurrentOrder();
+
+        if (!StringUtils.isEmpty(success)) {
+            response.addObject("success", success);
+        }
+        if (!StringUtils.isEmpty(success)) {
+            response.addObject("error", error);
+        }
 
         if(order == null){
             response.addObject("size", 0);

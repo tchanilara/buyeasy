@@ -64,7 +64,9 @@ public class CartService {
         //create a new shopping cart or orderProduct
         if(order == null){
             order = orderService.createNewOrder();
-            createNewOrderProduct(qty, productId, order.getId());
+            OrderProduct orderProduct = createNewOrderProduct(qty, productId, order.getId());
+            order.getOrderProductList().add(orderProduct);
+            orderDao.save(order);
 
         }else{
             //retrieve the  current shopping cart

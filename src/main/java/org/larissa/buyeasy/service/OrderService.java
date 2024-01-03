@@ -41,14 +41,14 @@ public class OrderService {
 
     }
 
-    public  void checkout(){
+    public  Order checkout(){
         Integer userId = authenticatedUserService.loadCurrentUser().getId();
         Order order = orderDao.findCurrentOrder(userId, "Cart");
         if(order != null){
             order.setStatus("On Hold");
-            orderDao.save(order);
+           return orderDao.save(order);
         }
-
+return null;
     }
     public  List<Order>  history(){
         Integer userId = authenticatedUserService.loadCurrentUser().getId();

@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.larissa.buyeasy.database.entity.Product;
 import org.larissa.buyeasy.formbean.CreateProductFormBean;
+import org.larissa.buyeasy.service.CartService;
 import org.larissa.buyeasy.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,6 +24,9 @@ public class AdminController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    CartService cartService;
 
     @GetMapping("/admin/product")
     public ModelAndView createProduct(@RequestParam(required = false) String success){
@@ -46,7 +50,7 @@ public class AdminController {
             }
             response.addObject("form",form);
             response.addObject("errors", bindingResult);
-            response.addObject("size", 0);
+            response.addObject("size",  cartService.getSizeCart());
             return response;
         }
 
@@ -57,7 +61,7 @@ public class AdminController {
 
         ModelAndView response =  new ModelAndView("admin/product");
         response.setViewName("redirect:product?success=Product Added Successfully");
-        response.addObject("size", 0);
+        response.addObject("size",  cartService.getSizeCart());
 
 
         return response;
