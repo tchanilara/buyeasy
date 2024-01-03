@@ -23,9 +23,13 @@ public class OrderService {
     @Autowired
     AuthenticatedUserService authenticatedUserService;
 
-    public Order loadCurrentOrder(Integer userId){
-        Order order = orderDao.findCurrentOrder(userId,"Cart");
-        return order;
+    public Order getCurrentOrder(){
+        Integer userId = authenticatedUserService.loadCurrentUser().getId();
+        return orderDao.findCurrentOrder(userId,"Cart");
+
+    }
+    public Order findById(Integer id){
+        return orderDao.findById(id);
 
     }
     public  Order createNewOrder(){

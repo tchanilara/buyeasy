@@ -49,13 +49,13 @@ public class CartService {
         return orderProductDao.save(orderProduct);
     }
 
-    public  void updateQty(Integer qty, Integer id){
+    public  OrderProduct updateQty(Integer qty, Integer id){
         OrderProduct orderProduct = orderProductDao.findById(id);
         orderProduct.setQuantityOrdered(qty);
-        orderProductDao.save(orderProduct);
+        return orderProductDao.save(orderProduct);
     }
 
-    public List<OrderProduct> addProductToOrder(Integer productId, Integer qty){
+    public Order addProductToOrder(Integer productId, Integer qty){
 
         Integer userId = authenticatedUserService.loadCurrentUser().getId();
         Order order = orderDao.findCurrentOrder(userId,"Cart");
@@ -76,7 +76,7 @@ public class CartService {
                 updateQty(qty, orderProduct.getId());
             }
         }
-        return  findByOrderId(order.getId());
+        return  orderDao.findById(order.getId());
 
     }
 
@@ -96,7 +96,7 @@ public class CartService {
 
     }
 
-    public List<OrderProduct> removeProductToOrder(Integer productId) {
+    public Order removeProductToOrder(Integer productId) {
 
         List<OrderProduct> carts = new ArrayList<>();
         Integer userId = authenticatedUserService.loadCurrentUser().getId();
@@ -104,10 +104,10 @@ public class CartService {
         if (order != null) {
             OrderProduct orderProduct = orderProductDao.findByOrderIdProductId(productId, order.getId());
             orderProductDao.delete(orderProduct);
-            carts = findByOrderId(order.getId());
+            return orderDao.findById(order.getId());
         }
 
-        return carts;
+        return order;
     }
     public  int getSizeCart(){
         User user = authenticatedUserService.loadCurrentUser();
@@ -120,47 +120,22 @@ public class CartService {
         return carts.isEmpty() ? 0 : carts.size();
     }
 
-    public List<OrderProduct> updateProductToOrder(Integer productId, Integer qty){
+    public Order updateProductToOrder(Integer productId, Integer qty){
 
         Integer userId = authenticatedUserService.loadCurrentUser().getId();
         Order order = orderDao.findCurrentOrder(userId,"Cart");
 
-        //return a empty cart
-        if(order == null){
-            return new ArrayList<>();
-
-        }else{
+        if(order != null){
             //retrieve the  current shopping cart
             OrderProduct orderProduct = orderProductDao.findByOrderIdProductId(productId, order.getId());
-            if(orderProduct == null){
-                return new ArrayList<>();
-            }else {
+            if(orderProduct != null){
                 //this product is already inside the shopping just update the quantity
-                updateQty(qty, orderProduct.getId());
+                return updateQty(qty, orderProduct.getId()).getOrder();
             }
         }
-        return  findByOrderId(order.getId());
+        return  order;
 
     }
 
-    public List<String> getTotal(List<OrderProduct> carts){
-        DecimalFormat df = new DecimalFormat("0.00");
-        List<String> totals = new ArrayList<>();
-
-        double subTotal = 0.00;
-        double shipping = 25.00;
-        double taxes = 0.06;
-
-        for (OrderProduct orderProduct : carts) {
-            subTotal += orderProduct.getProduct().getPrice() * orderProduct.getQuantityOrdered();
-        }
-
-        taxes = taxes * (subTotal + shipping);
-        totals.add(df.format(subTotal));
-        totals.add(df.format(shipping));
-        totals.add(df.format(taxes));
-        totals.add(df.format(subTotal + taxes+ shipping));
-        return totals;
-    }
 
 }

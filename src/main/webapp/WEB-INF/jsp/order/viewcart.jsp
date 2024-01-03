@@ -20,7 +20,7 @@
                   <div class="d-flex justify-content-between align-items-center mb-4">
                     <div>
                       <p class="mb-1">Shopping cart</p>
-                      <p class="mb-0">You have ${size} items in your cart</p>
+                      <p class="mb-0">You have ${cartVar.getNumberOfProducts()} items in your cart</p>
                     </div>
                     <div>
                       <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!" class="text-body">price <i
@@ -28,7 +28,7 @@
                     </div>
                   </div>
 
-                  <c:forEach items="${cartVar}" var="cart">
+                  <c:forEach items="${cartVar.orderProductList}" var="cart">
                     <div class="card mb-3">
                       <div class="card-body">
                         <div class="d-flex justify-content-between">
@@ -66,7 +66,7 @@
 
                 </div>
 
-                <c:if test="${size > 0}">
+                <c:if test="${cartVar.getNumberOfProducts() > 0}">
                   <div class="col-lg-4">
 
                     <div class="card bg-primary text-white rounded-3">
@@ -122,28 +122,28 @@
 
                         <div class="d-flex justify-content-between">
                           <p class="mb-2">Subtotal</p>
-                          <p class="mb-2">$${subtotal}</p>
+                          <p class="mb-2">$${cartVar.getSubTotalOrderPrice()}</p>
                         </div>
 
                         <div class="d-flex justify-content-between">
                           <p class="mb-2">Shipping</p>
-                          <p class="mb-2">$${shipping}</p>
+                          <p class="mb-2">$${cartVar.getShippingAmount()}</p>
                         </div>
 
                         <div class="d-flex justify-content-between">
                           <p class="mb-2">Taxes</p>
-                          <p class="mb-2">$${taxes}</p>
+                          <p class="mb-2">$${cartVar.getTax()}</p>
                         </div>
 
                         <div class="d-flex justify-content-between mb-4">
                           <p class="mb-2">Total(Incl. taxes)</p>
-                          <p class="mb-2">$${total}</p>
+                          <p class="mb-2">$${cartVar.getTotalOrderPrice()}</p>
                         </div>
 
                         <form class="d-flex " action="/order/checkout">
                           <button type="submit" class="btn btn-info btn-block btn-lg">
                             <div class="d-flex justify-content-between">
-                              <span>$${total}</span>
+                              <span>$${cartVar.getTotalOrderPrice()}</span>
                               <span>Checkout <i class="bi bi-arrow-right ms-2"></i></span>
                             </div>
                           </button>

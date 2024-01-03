@@ -17,12 +17,12 @@
 
                   <div class="d-flex justify-content-between align-items-center mb-4">
                     <div>
-                      <p class="mb-1">Order No</p>
-                      <p class="mb-0">${orderid} </p>
+                      <p class="mb-1">Order No: ${cartVar.id}</p>
+                      <p class="mb-0">Total: $${cartVar.getTotalOrderPrice()} </p>
                     </div>
                   </div>
 
-                  <c:forEach items="${cartVar}" var="cart">
+                  <c:forEach items="${cartVar.orderProductList}" var="cart">
                     <div class="card mb-3">
                       <div class="card-body">
                         <div class="d-flex justify-content-between">
