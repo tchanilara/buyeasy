@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../include/header.jsp" />
-<title>Add New Product</title>
+    <jsp:include page="../include/header.jsp" />
+    <title>Add New Product</title>
 
-<section>
+    <section>
         <div class="container d-flex justify-content-center mt-3">
             <form method="get" id="form" action="/admin/productSubmit">
                 <div class="text-center">
@@ -60,4 +60,4 @@
 
             </form>
         </div>
-        </section>
+    </section>

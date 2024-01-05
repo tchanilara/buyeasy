@@ -90,7 +90,7 @@ public class OrderController {
         log.info("In order view. cart  size " + order.getNumberOfProducts());
 
         response.addObject("cartVar", order);
-        response.addObject("size", order.getNumberOfProducts());
+        response.addObject("size", cartService.getSizeCart());
 
         return response;
     }

@@ -11,4 +11,9 @@ public class SlashController {
         ModelAndView response = new ModelAndView("index");
         return response;
     }
+    @GetMapping("/about")
+    public ModelAndView about() {
+        ModelAndView response = new ModelAndView("about");
+        return response;
+    }
 }

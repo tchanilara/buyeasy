@@ -94,21 +94,24 @@
 
             <div class="form-floating">
                 <label for="emailAddress">Email address</label>
-                <input type="email" class="form-control" id="emailAddress" name="email" value="${form.email}" placeholder="name@example.com" required>
+                <input type="email" class="form-control" id="emailAddress" name="email" value="${form.email}"
+                    placeholder="name@example.com" required>
                 <div class="error">
                 </div>
             </div>
             <div class="input-group">
                 <div class="form-floating mr-3">
                     <label for="firstname">First Name</label>
-                    <input type="text" class="form-control" id="firstname" name="firstName" value="${form.firstName}" placeholder="First Name" required>
+                    <input type="text" class="form-control" id="firstname" name="firstName" value="${form.firstName}"
+                        placeholder="First Name" required>
                     <div class="error">
                     </div>
                 </div>
 
                 <div class="form-floating">
                     <label for="lastname">Last Name</label>
-                    <input type="text" class="form-control" id="lastname" name="lastName" value="${form.lastName}" placeholder="Last Name" required>
+                    <input type="text" class="form-control" id="lastname" name="lastName" value="${form.lastName}"
+                        placeholder="Last Name" required>
                     <div class="error">
                     </div>
                 </div>
@@ -116,25 +119,29 @@
             <div class="input-group">
                 <div class="form-floating mr-3">
                     <label for="phone">Phone Number</label>
-                    <input type="text" class="form-control" id="phone" name="phone" value="${form.phone}" placeholder="xxx-xxx-xxxx">
+                    <input type="text" class="form-control" id="phone" name="phone" value="${form.phone}"
+                        placeholder="xxx-xxx-xxxx">
                 </div>
                 <div class="form-floating">
                     <label for="zipcode">Zip Code</label>
-                    <input type="text" class="form-control" id="zipcode" name="zipCode" value="${form.zipCode}" placeholder="12345">
+                    <input type="text" class="form-control" id="zipcode" name="zipCode" value="${form.zipCode}"
+                        placeholder="12345">
                 </div>
             </div>
             <div class="input-group">
 
                 <div class="form-floating mr-3">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" value="${form.password}" placeholder="Password" required>
+                    <input type="password" class="form-control" id="password" name="password" value="${form.password}"
+                        placeholder="Password" required>
                     <div class="error">
                     </div>
                 </div>
 
                 <div class="form-floating">
                     <label for="password2">Confirm Password</label>
-                    <input type="password" class="form-control" id="password1" name="password1" value="${form.password1}" placeholder="Password" required>
+                    <input type="password" class="form-control" id="password1" name="password1"
+                        value="${form.password1}" placeholder="Password" required>
                     <div class="error">
                     </div>
                 </div>

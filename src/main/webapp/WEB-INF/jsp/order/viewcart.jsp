@@ -22,7 +22,7 @@
                     shopping</a></h5>
                 <hr>
 
-                
+
                 <c:if test="${not empty success}">
                   <div class="text-center">
                     <div class="row justify-content-center">

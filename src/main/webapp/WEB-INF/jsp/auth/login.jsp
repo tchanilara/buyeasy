@@ -88,7 +88,8 @@
   <div class="container d-flex justify-content-center">
     <form method="post" id="form" action="/auth/loginSubmit">
       <div class="text-center">
-      <img src="/pub/images/logo.jpg" alt="" width="50" height="50"></div>
+        <img src="/pub/images/logo.jpg" alt="" width="50" height="50">
+      </div>
       <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
       <div class="form-floating">
