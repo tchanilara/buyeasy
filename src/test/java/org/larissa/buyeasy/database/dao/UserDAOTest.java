@@ -26,6 +26,7 @@ public class UserDAOTest {
         User user = new User();
 
         String encoded = passwordEncoder.encode("Test@1234");
+        user.setId(4);
         user.setFirstName("Test Firstname");
         user.setLastName("Test Lastname");
         user.setEmail("EmailTest@gmail.com");

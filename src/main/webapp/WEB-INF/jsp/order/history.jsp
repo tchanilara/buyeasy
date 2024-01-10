@@ -11,6 +11,9 @@
   <section class="h-100 h-custom" style="background-color: #eee;">
     <div id="history" class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
+        <h5 class="mb-3"><a href="/" class="text-body"><i class="bi bi-arrow-left me-2"></i>Continue
+                            shopping</a></h5>
+        <hr>
         <c:if test="${not empty cartVar}">
           <table class="searchable sortable table">
             <thead>

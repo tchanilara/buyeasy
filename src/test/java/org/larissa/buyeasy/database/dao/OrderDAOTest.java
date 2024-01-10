@@ -2,8 +2,11 @@ package org.larissa.buyeasy.database.dao;
 
 import org.junit.jupiter.api.*;
 import org.larissa.buyeasy.database.entity.Product;
+import org.larissa.buyeasy.database.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
 import java.util.List;
@@ -12,8 +15,15 @@ import java.util.List;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class OrderDAOTest {
 
+
+
     @Autowired
     OrderDAO orderDao;
+
+
+    @Autowired
+    UserDAO userDao;
+
 
     @Test
     @Order(1)
@@ -22,9 +32,11 @@ public class OrderDAOTest {
 
         //given
         org.larissa.buyeasy.database.entity.Order order = new org.larissa.buyeasy.database.entity.Order();
+        order.setId(1);
         order.setOrderDate(createdDate);
         order.setStatus("Cart");
         order.setComments("Test comments 123457");
+        order.setUser(userDao.findById(7));
 
         //when
         order = orderDao.save(order);
@@ -34,7 +46,7 @@ public class OrderDAOTest {
         Assertions.assertEquals("Cart", order.getStatus());
         Assertions.assertEquals("Test comments 123457", order.getComments());
         Assertions.assertEquals(createdDate, order.getOrderDate());
-        Assertions.assertNull(order.getUser());
+        Assertions.assertNotNull(order.getUser());
 
     }
 
@@ -53,7 +65,7 @@ public class OrderDAOTest {
         Assertions.assertEquals("Cart", order.getStatus());
         Assertions.assertEquals("Test comments 123457", order.getComments());
         Assertions.assertEquals(new Date(2024,1,1), order.getOrderDate());
-        Assertions.assertNull(order.getUser());
+        Assertions.assertNotNull(order.getUser());
     }
     @Test
     @Order(3)
